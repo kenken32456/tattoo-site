@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tattoo Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body class="bg-black text-zinc-100">
@@ -157,5 +158,15 @@
   </footer>
 
   <script src="./assets/main.js"></script>
+  <script>
+    if (location.hash.includes('invite_token') || location.hash.includes('recovery_token')) {
+      if (window.netlifyIdentity) window.netlifyIdentity.open();
+    }
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('login', () => {
+        location.href = '/admin/';
+      });
+    }
+  </script>
 </body>
 </html>
