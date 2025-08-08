@@ -4,22 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin</title>
-    <!-- Netlify Identity widget (login) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <!-- Decap (Netlify) CMS -->
-    <script src="https://unpkg.com/decap-cms@3.3.0/dist/decap-cms.js"></script>
+    <!-- Netlify Identity (login) -->
+    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <!-- This element is required -->
+    <!-- Mount point required by Decap CMS -->
     <div id="nc-root"></div>
 
+    <!-- Decap (Netlify) CMS — defer so it runs AFTER nc-root exists -->
+    <script defer src="https://unpkg.com/decap-cms@3.3.0/dist/decap-cms.js"></script>
+    <!-- If that CDN fails for you, swap to this one:
+    <script defer src="https://cdn.jsdelivr.net/npm/decap-cms@3.3.0/dist/decap-cms.js"></script>
+    -->
+
     <script>
-      // Optional: auto-refresh after login
+      // Optional: refresh after login
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => document.location.reload());
-          }
+          if (!user) window.netlifyIdentity.on("login", () => location.reload());
         });
       }
     </script>
